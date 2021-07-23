@@ -1,5 +1,4 @@
-Marko Widgets: UI Components Playground w/ rollup.js
-==================================
+# Example of async streaming SSR with Marko.js
 
 ## Getting Started
 
@@ -9,6 +8,7 @@ npm run dev
 ```
 
 ## Production Build
+
 ```bash
 npm run build
 npm start
