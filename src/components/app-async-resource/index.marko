@@ -1,0 +1,22 @@
+$ const personPromise = new Promise((resolve, reject) => {
+  setTimeout(() => resolve({ name: 'Michal' }), 10000);
+});
+
+<await(personPromise) client-reorder=true>
+  <@placeholder>
+    <!-- Displays while promise is pending -->
+    <label>Loading…
+      <progress></progress>
+    </label>
+  </@placeholder>
+
+  <@then|person|>
+    <!-- Displays if promise resolves -->
+    <p>Hello ${person.name}!</p>
+  </@then>
+
+  <@catch|err|>
+    <!-- Displays if promise rejects -->
+    ${err.name} error: ${err.message}
+  </@catch>
+</await>

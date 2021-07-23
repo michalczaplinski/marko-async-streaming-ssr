@@ -1,12 +1,36 @@
-<app-layout>
-  <@head>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="An example application showcasing rollup.js & Marko.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- This stuff is needed by rollup to put the chunks in the <head> -->
+    <rollup|entry, output|>
+      $ const jsChunk = output.find(chunk => chunk.name === entry);
+      <for|fileName| of=jsChunk.imports>
+        <link rel="modulepreload" href=`/static/${fileName}`/>
+      </for>
+      <script async type="module" src=`/static/${jsChunk.fileName}`/>
+      <if(output.find(chunk => /\.css$/.test(chunk.fileName)))>
+        <link rel="stylesheet" href=`/static/${output.find(chunk => /\.css$/.test(chunk.fileName)).fileName}`/>
+      </if>
+    </rollup>
+    <!-- END of rollup stuff -->
+
     <title>UI Components Playground</title>
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"
       media="all"
-      rel="stylesheet"/>
-  </@head>
-  <@body>
-    <app-main/>
-  </@body>
-</app-layout>
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <main id="main">
+        <app-main/>
+      </main>
+    </div>
+  </body>
+</html>
+
